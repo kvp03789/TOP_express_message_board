@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs')%>
+<body>
+    <form method="POST" action="/" >
+        <div class="form-section">
+            <label for="name">Enter your username: </label>
+            <input class="form-input" name="user">
+        </div>
+        <div class="form-section">
+            <label for="message">Message: </label>
+            <input class="form-input" name="text">
+        </div>
+        <div>
+            <input type="submit" value="SUBMIT">
+        </div>
+    </form>
+</body>
+</html>

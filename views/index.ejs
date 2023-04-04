@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+  
+  <!DOCTYPE html>
+  <html lang="en">
+  <%- include('./partials/head.ejs')%>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <% 
+    messages.forEach(msg => {
+      %>
+      <div class="message">
+      <p class="message-text"><%= msg.text %></p>
+        <p class="message-added"><%= msg.added %></p>
+        <h3 class="message-user"><%= msg.user %></h3>
+      </div>
+    <% })%>
   </body>
 </html>
