@@ -1,33 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const Message = require('../models/message.js')
 
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date()
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date()
-  }
-];
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', messages });
-  messages = tempArray
+router.get('/', async function(req, res, next) {
+  const messages = await Message.find();
+  res.render('index', { title: 'chat for fat idiots', messages: messages });
 });
 
 router.post('/', (req, res, next) => {
+  const dateAdded = new Date()
   const newMessage = {
-      text: req.body.text,
-      user: req.body.user,
-      added: new Date()
+    text: req.body.text,
+    user: req.body.user,
+    added: `${dateAdded}`
   }
-  messages.push(newMessage)
-  res.redirect('/');
+  const messageColRef = new Message({...newMessage})
+  messageColRef.save()
+    .then(result => res.redirect('/'))
+    .catch(err => console.log(err))
+  
 })
 
-module.exports = router, messages;
+module.exports = router
